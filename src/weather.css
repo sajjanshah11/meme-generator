@@ -1,0 +1,18 @@
+.search{
+    text-align: center;
+}
+
+input{
+    height: 22px;
+    width: 16rem;
+    margin-top: 5rem;
+}
+
+.container{
+    height: 10rem;
+    width: 17rem;
+    display: block;
+    margin: auto;
+    margin-top: 4rem;
+    border: 2px solid green;
+}
