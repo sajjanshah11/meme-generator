@@ -16,3 +16,38 @@ input{
     margin-top: 4rem;
     border: 2px solid green;
 }
+
+button{
+    position: fixed;
+    top:5rem;
+}
+
+.thirty-container{
+    position: fixed;
+    top: 10rem;
+    width: 14rem;
+    height: 11rem;
+    /* border: 2px solid red; */
+}
+
+.fiveday-btn{
+    position: fixed;
+    right: 3rem;
+}
+
+.fiveday-container{
+    position: fixed;
+    right: 3rem;
+    top: 7rem;
+}
+
+.sixteen{
+    position: fixed;
+    right: 9rem;
+}
+
+.sixteen-container{
+    position: fixed;
+    right: 6rem;
+    top: 7rem;
+}

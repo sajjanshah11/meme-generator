@@ -1,6 +1,9 @@
 import React from "react";
 import "./weather.css";
 import axios from "axios";
+import WeatherThirty from "./WeatherThirty"
+import FiveDay from "./FiveDay"
+import WeatherSixteen from "./WeatherSixteen"
 
 const currentWeather =
   "https://community-open-weather-map.p.rapidapi.com/weather";
@@ -57,6 +60,12 @@ const Weather = () => {
           </div>
         ))}
       </div>
+      <div className = "flex-container">
+        <WeatherThirty answer = {answer}/>
+        <FiveDay answer = {answer}/>
+        <WeatherSixteen />
+      </div>
+      
     </>
   );
 };
