@@ -6,25 +6,25 @@ const fiveDayWeather = "https://community-open-weather-map.p.rapidapi.com/foreca
 
 const FiveDay = (props)=>{
     const[five,setFive] = React.useState();
-    const[check,setCheck] = React.useState(false)
     React.useEffect(()=>{
         axios
             .get(fiveDayWeather,{
                 params:{
-                    q:'delhi'
+                    q: props.answer || 'noida'
                 },
                 headers:{
-                    "x-rapidapi-host":"community-open-weather-map.p.rapidapi.com",
-                    "x-rapidapi-key":"2322907e88msh323aeb45d46445bp1e87e5jsn445088b15555"
+                     'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+                    'x-rapidapi-key': '10e92000e2msha02a3a21cb31d0dp169ed5jsn6b843d9a7c37'
                 }
             }).then(response => {
                 setFive(response.data)
             }).catch(error => {
                 console.log(error.message);
             })
-    },[])
+    },[props.answer])
 
-    console.log(five?.list)
+    
+    // console.log(five?.list)
 
     const fivedayElement = five?.list?.map(el => (
         <div>
@@ -37,17 +37,12 @@ const FiveDay = (props)=>{
         </div>
     ))
 
-    function clickHandler(){
-        setCheck((prev)=>{
-           return prev ? false : true
-        })
-    }
-
+   
     return(
         <>
-            <button className = "fiveday-btn" onClick = {clickHandler}>five days</button>
+            <button className = "fiveday-btn" onClick = {props.clickHandler}>5 days</button>
             <div className = "fiveday-container">
-                {check && fivedayElement}
+                {props.check && fivedayElement}
             </div>
         </>
     )

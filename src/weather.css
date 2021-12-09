@@ -1,53 +1,111 @@
+body{
+    background: #d53369;  
+background: -webkit-linear-gradient(to right, #cbad6d, #d53369);  
+background: linear-gradient(to right, #cbad6d, #d53369);
+font-family: 'Readex Pro', sans-serif;
+font-family: 'Roboto Slab', serif;
+}
 .search{
     text-align: center;
 }
-
+button {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 input{
-    height: 22px;
-    width: 16rem;
-    margin-top: 5rem;
+    height: 28px;
+    width: 21rem;
+    margin-top: 3rem;
+    /* border-radius: 1rem; */
+    border: none;
+    font-size: 1rem;
 }
 
 .container{
+    position: fixed;
+    top: -66px;
+    right: 1rem;
     height: 10rem;
     width: 17rem;
     display: block;
     margin: auto;
     margin-top: 4rem;
-    border: 2px solid green;
+
+    /* border: 2px solid green; */
 }
 
-button{
-    position: fixed;
-    top:5rem;
-}
 
-.thirty-container{
-    position: fixed;
-    top: 10rem;
-    width: 14rem;
-    height: 11rem;
-    /* border: 2px solid red; */
-}
+
 
 .fiveday-btn{
     position: fixed;
-    right: 3rem;
+    top: 10rem;
+    right: 6rem;;
 }
 
-.fiveday-container{
-    position: fixed;
-    right: 3rem;
-    top: 7rem;
-}
 
 .sixteen{
     position: fixed;
-    right: 9rem;
+    top: 10rem;
+    left: 33rem;
 }
 
-.sixteen-container{
+/* .sixteen-container{
     position: fixed;
     right: 6rem;
     top: 7rem;
+    left: 33rem;
+} */
+
+.main{
+    text-align: center;
+    /* border: 2px solid #d0b5b5; */
+    width: 50%;
+    margin: auto;
+    border-radius: 15px;
+    color: whitesmoke;
+}
+
+.thirty{
+    position: fixed;
+    top: 10rem;
+    left: 4rem;
+}
+
+.thirty-container{
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 14rem;
+    padding: 9px;
+    left: 1rem;
+    overflow: auto;
+}
+
+.sixteen-container{
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 14rem;
+    padding: 9px;
+    left: 28rem;
+    overflow: auto;
+}
+
+.fiveday-container{
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 14rem;
+    padding: 9px;
+    right: 2rem;
+    overflow: auto;
 }

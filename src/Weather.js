@@ -1,34 +1,44 @@
 import React from "react";
 import "./weather.css";
 import axios from "axios";
-import WeatherThirty from "./WeatherThirty"
-import FiveDay from "./FiveDay"
-import WeatherSixteen from "./WeatherSixteen"
+import WeatherThirty from "./WeatherThirty";
+import FiveDay from "./FiveDay";
+import WeatherSixteen from "./WeatherSixteen";
 
-const currentWeather =
-  "https://community-open-weather-map.p.rapidapi.com/weather";
+
+const currentWeather ="https://community-open-weather-map.p.rapidapi.com/weather";
+
+
 
 const Weather = () => {
-  let [data, setData] = React.useState("");
-  let [answer, SetAnswer] = React.useState("");
+
+  const [data, setData] = React.useState("");
+  const [answer, SetAnswer] = React.useState("");
+  const [check, setCheck] = React.useState(false);
+
+
+  function clickHandler() {
+    setCheck((prev) => {
+      return prev ? false : true;
+    });
+  }
 
   function changeHandler(event) {
-    if(event.key === "Enter"){
-        SetAnswer(event.target.value)
+    if (event.key === "Enter") {
+      SetAnswer(event.target.value);
     }
   }
 
   React.useEffect(() => {
-
     axios
       .get(currentWeather, {
         params: {
-          q: answer || 'noida' ,
+          q: answer || "noida",
         },
         headers: {
           "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
           "x-rapidapi-key":
-            "2322907e88msh323aeb45d46445bp1e87e5jsn445088b15555",
+            "10e92000e2msha02a3a21cb31d0dp169ed5jsn6b843d9a7c37",
         },
       })
       .then((response) => {
@@ -39,14 +49,14 @@ const Weather = () => {
       });
   }, [answer]);
 
-  console.log(answer)
 
   return (
     <>
+      <h2 class="main">Real Time Weather Application</h2>
       <div className="search">
         <input
           type="text"
-          placeholder="Enter your city"
+          placeholder="Enter your city to see the current weather"
           onKeyDown={changeHandler}
         />
       </div>
@@ -55,17 +65,18 @@ const Weather = () => {
         {data?.weather?.map((el) => (
           <div>
             <h1> {el.description} </h1>
-            <img src = {"http://api.openweathermap.org/img/w/"+el.icon+".png"} alt = "please check internet"  />
-            
+            <img
+              src={"http://api.openweathermap.org/img/w/" + el.icon + ".png"}
+              alt="please check internet"
+            />
           </div>
         ))}
       </div>
-      <div className = "flex-container">
-        <WeatherThirty answer = {answer}/>
-        <FiveDay answer = {answer}/>
-        <WeatherSixteen />
+      <div className="flex-container">
+        <WeatherThirty answer = {answer} clickHandler = {clickHandler} check = {check} />
+        <WeatherSixteen answer = {answer} clickHandler = {clickHandler} check  = {check} />
+        <FiveDay answer={answer} clickHandler = {clickHandler} check = {check}  />
       </div>
-      
     </>
   );
 };
