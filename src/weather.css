@@ -38,32 +38,7 @@ input{
     display: block;
     margin: auto;
     margin-top: 4rem;
-
-    /* border: 2px solid green; */
 }
-
-
-
-
-.fiveday-btn{
-    position: fixed;
-    top: 10rem;
-    right: 6rem;;
-}
-
-
-.sixteen{
-    position: fixed;
-    top: 10rem;
-    left: 33rem;
-}
-
-/* .sixteen-container{
-    position: fixed;
-    right: 6rem;
-    top: 7rem;
-    left: 33rem;
-} */
 
 .main{
     text-align: center;
@@ -74,48 +49,9 @@ input{
     color: whitesmoke;
 }
 
-.thirty{
-    position: fixed;
-    top: 10rem;
-    left: 4rem;
-}
-
-.thirty-container{
-    width: 20%;
-    height: 100%;
-    position: fixed;
-    top: 14rem;
-    padding: 9px;
-    left: 1rem;
-    overflow: auto;
-}
-
-.sixteen-container{
-    width: 20%;
-    height: 100%;
-    position: fixed;
-    top: 14rem;
-    padding: 9px;
-    left: 28rem;
-    overflow: auto;
-}
-
-.fiveday-container{
-    width: 20%;
-    height: 100%;
-    position: fixed;
-    top: 14rem;
-    padding: 9px;
-    right: 2rem;
-    overflow: auto;
-}
-
-.name-container{
-    height: 2rem;
-    color: rgb(22, 14, 14);
-    position: fixed;
-    left: 3rem;
-    top: 3rem;
-    width: 12rem;
-    font-size: 2rem;
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 40px;
 }

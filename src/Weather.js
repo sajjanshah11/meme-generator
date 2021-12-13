@@ -16,6 +16,7 @@ const Weather = () => {
     const [weather, setWeather] = React.useState("");
     const[five,setFive] = React.useState();
     const[api,setApi] = React.useState();
+    const[day,setDay] = React.useState("1");
 
     function changeHandler(event) {
         if (event.key === "Enter") {
@@ -26,6 +27,7 @@ const Weather = () => {
 
     function showDuration30() {
         SetDuration30(answer);
+        SetDuration16("")
         setApi("/climate/month")
     }
 
@@ -78,14 +80,18 @@ const Weather = () => {
             <p>{"Gust -->" + el.gust}</p>
             <p>{"Sunrise --> " + el.sunrise}</p>
             <p>{"Sunset -->" + el.sunset}</p>
+            <hr/>
         </div>
     ));
 
-    const weatherListThirty = weatherthirty?.list?.map((el,pos)=>(
+    const newWeatherThirty = weatherthirty?.list?.splice(0,day)
+    console.log(weatherthirty.list, day)
+    const weatherListThirty = newWeatherThirty?.map((el,pos)=>(
         <div key = {pos}>
             <p>{"Humidity --> " + el.humidity + "kg-1"}</p>
             <p>{"Pressure -->" + el.pressure + "N/m2"}</p>
             <p>{"WindSpeed -->" + el.wind_speed + "m/s"}</p>
+            <hr/>
         </div>
     ))
 
@@ -97,13 +103,19 @@ const Weather = () => {
             <p>{"Minimum Temperature -->"+el.main.temp_min}</p>
             <p>{"Maximum Temperature -->"+el.main.temp_max}</p>
             <p>{"Pressure-->"+el.main.pressure}</p>
+            <hr/>
         </div>
     ))
+
+    function setDurationDay(day){
+        setDay(day)
+    }
 
     return (
     <>
         <h2 className="main">Real Time Weather Application</h2>
         <div className="search">
+            
             <input
                 type="text"
                 placeholder="Enter your city to see the current weather"
@@ -129,15 +141,28 @@ const Weather = () => {
         <div className="flex-container">
             <div>
                 <button onClick = {showDuration30} className = "thirty">30 days </button>
-                <div className = "thirty-container">{weatherListThirty}</div>
+                <label for="days">Choose a days:</label>
+            <select name="days" id="days" onChange = {(e)=>setDurationDay(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div className = "thirty-container">{weatherListThirty}</div>
             </div>
             <div>
-                <button className="sixteen" onClick={showDuration16}>16 Days</button>
-                <div className="sixteen-container">{weatherListSixteen}</div>
+                <button className="sixteen" onClick={showDuration16}>16 day/daily</button>
+                  <div className="sixteen-container">{weatherListSixteen}</div>
             </div>
             <div>
-                <button className = "fiveday-btn" onClick = {showDuration5}>5 days</button>
-                <div className = "fiveday-container">{weatherListFive}</div>
+                <button className = "fiveday-btn" onClick = {showDuration5}>5 day/3 hour</button>
+                 <div className = "fiveday-container">{weatherListFive}</div>
             </div> 
         </div>
     </>
