@@ -63,7 +63,7 @@ const Weather = () => {
         });
     },[answer,duration30,duration16,duration5])
 
-    const weatherListSixteen = weather?.list?.map((el,pos) => (
+    const weatherListSixteen = data?.list?.map((el,pos) => (
         <div key = {pos}>
             <p>{"Sunrise --> " + el.sunrise}</p>
             <p>{"Sunset -->" + el.sunset}</p>
@@ -71,7 +71,7 @@ const Weather = () => {
         </div>
     ));
 
-    const weatherListThirty = weatherthirty?.list?.map((el,pos)=>(
+    const weatherListThirty = data?.list?.map((el,pos)=>(
         <div key = {pos}>
             <p>{"Humidity --> " + el.humidity + "kg-1"}</p>
             <p>{"Pressure -->" + el.pressure + "N/m2"}</p>
@@ -79,7 +79,7 @@ const Weather = () => {
         </div>
     ))
 
-    const weatherListFive = five?.list?.map((el,pos) => (
+    const weatherListFive = data?.list?.map((el,pos) => (
         <div key = {pos}>
             <p>{"humidity -->"+el.main.humidity}</p>
             <p>{"Temperature -->"+el.main.temp}</p>
