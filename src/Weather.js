@@ -51,11 +51,21 @@ const Weather = () => {
         })
     }
 
-    //useEffect for current weather location
+    //useEffect for weather location
     React.useEffect(() => {
         if(answer === '') return;
         callAPI(api, answer).then((response) => {
-            setData(response.data);
+            
+            if(api === "/weather"){
+                setData(response.data)
+            }else if(api === "/climate/month"){
+                setWeatherThirthy(response.data)
+            }else if(api === "/forecast/daily"){
+                setWeather(response.data)
+            }else{
+                setFive(response.data)
+            }
+
             console.log("my data -->",response.data)
         })
         .catch((err) => {
@@ -63,15 +73,15 @@ const Weather = () => {
         });
     },[answer,duration30,duration16,duration5])
 
-    const weatherListSixteen = data?.list?.map((el,pos) => (
+    const weatherListSixteen = weather?.list?.map((el,pos) => (
         <div key = {pos}>
+            <p>{"Gust -->" + el.gust}</p>
             <p>{"Sunrise --> " + el.sunrise}</p>
             <p>{"Sunset -->" + el.sunset}</p>
-            <p>{"Gust -->" + el.gust}</p>
         </div>
     ));
 
-    const weatherListThirty = data?.list?.map((el,pos)=>(
+    const weatherListThirty = weatherthirty?.list?.map((el,pos)=>(
         <div key = {pos}>
             <p>{"Humidity --> " + el.humidity + "kg-1"}</p>
             <p>{"Pressure -->" + el.pressure + "N/m2"}</p>
@@ -79,7 +89,7 @@ const Weather = () => {
         </div>
     ))
 
-    const weatherListFive = data?.list?.map((el,pos) => (
+    const weatherListFive = five?.list?.map((el,pos) => (
         <div key = {pos}>
             <p>{"humidity -->"+el.main.humidity}</p>
             <p>{"Temperature -->"+el.main.temp}</p>
