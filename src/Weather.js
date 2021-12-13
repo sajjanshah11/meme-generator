@@ -75,7 +75,8 @@ const Weather = () => {
         });
     },[answer,duration30,duration16,duration5])
 
-    const weatherListSixteen = weather?.list?.map((el,pos) => (
+    const newWeatherListSixteen = weather?.list?.splice(0,day)
+    const weatherListSixteen = newWeatherListSixteen?.map((el,pos) => (
         <div key = {pos}>
             <p>{"Gust -->" + el.gust}</p>
             <p>{"Sunrise --> " + el.sunrise}</p>
@@ -85,7 +86,7 @@ const Weather = () => {
     ));
 
     const newWeatherThirty = weatherthirty?.list?.splice(0,day)
-    console.log(weatherthirty.list, day)
+    // console.log(weatherthirty.list, day)
     const weatherListThirty = newWeatherThirty?.map((el,pos)=>(
         <div key = {pos}>
             <p>{"Humidity --> " + el.humidity + "kg-1"}</p>
@@ -95,7 +96,9 @@ const Weather = () => {
         </div>
     ))
 
-    const weatherListFive = five?.list?.map((el,pos) => (
+    const newWeatherListFive = five?.list?.splice(0,day);
+
+    const weatherListFive = newWeatherListFive?.map((el,pos) => (
         <div key = {pos}>
             <p>{"humidity -->"+el.main.humidity}</p>
             <p>{"Temperature -->"+el.main.temp}</p>
@@ -158,10 +161,36 @@ const Weather = () => {
             </div>
             <div>
                 <button className="sixteen" onClick={showDuration16}>16 day/daily</button>
+                <label for="days">Choose a days:</label>
+                <select name="days" id="days" onChange = {(e)=>setDurationDay(e.target.value)}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
                   <div className="sixteen-container">{weatherListSixteen}</div>
             </div>
             <div>
                 <button className = "fiveday-btn" onClick = {showDuration5}>5 day/3 hour</button>
+                <label for="days">Choose a days:</label>
+                <select name="days" id="days" onChange = {(e)=>setDurationDay(e.target.value)}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
                  <div className = "fiveday-container">{weatherListFive}</div>
             </div> 
         </div>
