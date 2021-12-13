@@ -109,3 +109,13 @@ input{
     right: 2rem;
     overflow: auto;
 }
+
+.name-container{
+    height: 2rem;
+    color: rgb(22, 14, 14);
+    position: fixed;
+    left: 3rem;
+    top: 3rem;
+    width: 12rem;
+    font-size: 2rem;
+}
