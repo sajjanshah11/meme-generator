@@ -15,23 +15,28 @@ const Weather = () => {
     const[weatherthirty,setWeatherThirthy] = React.useState("");
     const [weather, setWeather] = React.useState("");
     const[five,setFive] = React.useState();
+    const[api,setApi] = React.useState();
 
     function changeHandler(event) {
         if (event.key === "Enter") {
             SetAnswer(event.target.value);
+            setApi("/weather")
         }
     }
 
     function showDuration30() {
         SetDuration30(answer);
+        setApi("/climate/month")
     }
 
     function showDuration16() {
         SetDuration16(answer);
+        setApi("/forecast/daily")
     }
 
     function showDuration5() {
         SetDuration5(answer);
+        setApi("/forecast")
     }
 
     function callAPI(API_URL, keyword) {
@@ -49,17 +54,9 @@ const Weather = () => {
     //useEffect for current weather location
     React.useEffect(() => {
         if(answer === '') return;
-        callAPI('/weather', answer).then((response) => {
+        callAPI(api, answer).then((response) => {
             setData(response.data);
-        })
-        callAPI('/climate/month', answer).then(response=>{
-            setWeatherThirthy(response.data)
-        })
-        callAPI('/forecast/daily', answer).then((response) => {
-            setWeather(response.data);
-        })
-        callAPI('/forecast', answer).then(response => {
-            setFive(response.data)
+            console.log("my data -->",response.data)
         })
         .catch((err) => {
             console.log(err);
