@@ -52,66 +52,44 @@ const Weather = () => {
         callAPI('/weather', answer).then((response) => {
             setData(response.data);
         })
-        .catch((err) => {
-            console.log(err);
-        });
-    },[answer])
-
-    //useEffect for 30 days duration
-    React.useEffect(() => {
-        if(answer === '') return;
         callAPI('/climate/month', answer).then(response=>{
             setWeatherThirthy(response.data)
-        }).catch(error => {
-            console.log(error.message)
         })
-    }, [duration30])
-
-    //useEffect for 16 days duration    
-    React.useEffect(() => {
-        if(answer === '') return;
         callAPI('/forecast/daily', answer).then((response) => {
             setWeather(response.data);
         })
-        .catch((error) => {
-            console.log(error.message);
-        });
-    }, [duration16]);
-
-    //useEffect for 5 days duration
-    React.useEffect(()=>{
-        if(answer === '') return;
         callAPI('/forecast', answer).then(response => {
             setFive(response.data)
-        }).catch(error => {
-            console.log(error.message);
         })
-    },[duration5])
+        .catch((err) => {
+            console.log(err);
+        });
+    },[answer,duration30,duration16,duration5])
 
-    const weatherListSixteen = weather?.list?.map((el,uid) => (
-        <div>
-            <p key = {el.uniqueId}>{"Sunrise --> " + el.sunrise}</p>
-            <p key = {el.uniqueId}>{"Sunset -->" + el.sunset}</p>
-            <p key = {el.uniqueId}>{"Gust -->" + el.gust}</p>
+    const weatherListSixteen = weather?.list?.map((el,pos) => (
+        <div key = {pos}>
+            <p>{"Sunrise --> " + el.sunrise}</p>
+            <p>{"Sunset -->" + el.sunset}</p>
+            <p>{"Gust -->" + el.gust}</p>
         </div>
     ));
 
-    const weatherListThirty = weatherthirty?.list?.map((el)=>(
-        <>
-            <p key = {el.uniqueId}>{"Humidity --> " + el.humidity + "kg-1"}</p>
-            <p key = {el.uniqueId}>{"Pressure -->" + el.pressure + "N/m2"}</p>
-            <p key = {el.uniqueId}>{"WindSpeed -->" + el.wind_speed + "m/s"}</p>
-        </>
+    const weatherListThirty = weatherthirty?.list?.map((el,pos)=>(
+        <div key = {pos}>
+            <p>{"Humidity --> " + el.humidity + "kg-1"}</p>
+            <p>{"Pressure -->" + el.pressure + "N/m2"}</p>
+            <p>{"WindSpeed -->" + el.wind_speed + "m/s"}</p>
+        </div>
     ))
 
-    const weatherListFive = five?.list?.map((el,uid) => (
-        <div>
-            <p key = {el.uniqueId}>{"humidity -->"+el.main.humidity}</p>
-            <p key = {el.uniqueId}>{"Temperature -->"+el.main.temp}</p>
-            <p key = {el.uniqueId}>{"Feels Like -->"+el.main.feels_like}</p>
-            <p key = {el.uid}>{"Minimum Temperature -->"+el.main.temp_min}</p>
-            <p key = {el.uniqueId}>{"Maximum Temperature -->"+el.main.temp_max}</p>
-            <p key = {el.uniqueId}>{"Pressure-->"+el.main.pressure}</p>
+    const weatherListFive = five?.list?.map((el,pos) => (
+        <div key = {pos}>
+            <p>{"humidity -->"+el.main.humidity}</p>
+            <p>{"Temperature -->"+el.main.temp}</p>
+            <p>{"Feels Like -->"+el.main.feels_like}</p>
+            <p>{"Minimum Temperature -->"+el.main.temp_min}</p>
+            <p>{"Maximum Temperature -->"+el.main.temp_max}</p>
+            <p>{"Pressure-->"+el.main.pressure}</p>
         </div>
     ))
 
@@ -128,11 +106,10 @@ const Weather = () => {
 
         <div className="container">
             <div className = "name-container">{answer}</div>
-            {data?.weather?.map((el) => (
-                <div>
-                    <h1 key = {el.uniqueId}> {el.description} </h1>
+            {data?.weather?.map((el,pos) => (
+                <div key = {pos}>
+                    <h1> {el.description} </h1>
                     <img
-                        key = {el.uniqueId}
                         src={"http://api.openweathermap.org/img/w/" + el.icon + ".png"}
                         alt="please check internet"
                     />
