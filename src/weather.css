@@ -56,6 +56,14 @@ input{
     margin-top: 40px;
 }
 
+#days{
+  width: 66%;
+  display: block;
+  margin: auto;
+  margin-bottom: 2rem;
+  font-size: 16px;
+}
+
 table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;

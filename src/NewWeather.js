@@ -13,7 +13,7 @@ const NewWeather = () =>{
     const[currentWeather, setCurrentWeather] = React.useState("");
     const[weather4Data,setWeather4Data] = React.useState("");
     const[weather4,setWeather4] = React.useState("");
-    const[id,setId] = React.useState("");
+    const[dayCount,setDayCount] = React.useState(10);
 
     function callAPI(API_URL,params){
         return axios.get(API_BASE_URL + API_URL,{
@@ -36,19 +36,25 @@ const NewWeather = () =>{
         setWeather4(city)
     }
 
+    function setDays(event){
+        if(event.key === "Enter"){
+            setDayCount(event.target.value)
+            setApi("/forecast");
+        }
+    }
+
     React.useEffect(()=>{
         if(city === '') return;
-        callAPI(api,{q : city ,id : id}).then((response)=>{
+        callAPI(api,{q : city ,cnt : dayCount}).then((response)=>{
             if(api === '/weather'){
                 setCurrentWeather(response.data)
-                setId(response.data.id)
             }
             if(api === '/forecast'){
                 setWeather4Data(response.data)
                 console.log(response.data)
             }
         })
-    },[city,weather4])
+    },[city,weather4,dayCount])
 
     const currentWeatherList = currentWeather?.weather?.map((el,pos)=>(
         <div key = {pos}>
@@ -70,20 +76,31 @@ const NewWeather = () =>{
                         onKeyDown={setCityName}
                     />
                 </div>
-            
+
+                
             <div className = "container">
+                {/* <p>Current Weather</p> */}
                 <div className = "name-container">{city}</div>
                 {currentWeatherList}
             </div>
 
             <div className = "flex-container">
                 <div>
-                    <button onClick = {setDuration4} className = "thirty">Hourly Forecast 4 days</button>
+                    <h2>Enter the Number of days to see the weather forecast</h2>
+                    <input
+                        id = "days"
+                        type="number"
+                        // placeholder="Enter a Days to see the weather"
+                        min = "1"
+                        max = "40"
+                        onKeyDown={setDays}
+
+                    />
                 </div>
             </div>
 
             <div>
-                <div className = "thirty-container">
+                <div className = "four-container">
                      <ReactBootStrap.Table striped bordered hover>
                         <thead>
                             <tr>
