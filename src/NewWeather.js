@@ -13,7 +13,7 @@ const NewWeather = () =>{
     const[currentWeather, setCurrentWeather] = React.useState("");
     const[weather4Data,setWeather4Data] = React.useState("");
     const[weather4,setWeather4] = React.useState("");
-    const[dayCount,setDayCount] = React.useState(10);
+    const[dayCount,setDayCount] = React.useState();
 
     function callAPI(API_URL,params){
         return axios.get(API_BASE_URL + API_URL,{
@@ -65,7 +65,9 @@ const NewWeather = () =>{
         </div>
     ))
 
-   
+    console.log(currentWeather);
+
+    // console.log(weather4Data);
     return(
         <>
             <h2 className="main">Real Time Weather Application</h2>
@@ -90,7 +92,7 @@ const NewWeather = () =>{
                     <input
                         id = "days"
                         type="number"
-                        // placeholder="Enter a Days to see the weather"
+                        placeholder="Enter a Days to see the weather"
                         min = "1"
                         max = "40"
                         onKeyDown={setDays}
@@ -114,11 +116,11 @@ const NewWeather = () =>{
                         <tbody>
                             { weather4Data?.list?.map((el,pos)=>(
                                 <tr key = {pos}>
-                                    <td>{el.main.humidity}</td>
-                                    <td>{el.main.pressure}</td>
-                                    <td>{el.main.temp}</td>
-                                    <td>{el.main.temp_max}</td>
-                                    <td>{el.main.temp_min}</td>
+                                    <td>{el.main.humidity}%</td>
+                                    <td>{el.main.pressure} Pa</td>
+                                    <td>{parseFloat(el.main.temp - 273.15).toFixed(1)}&deg;C</td>
+                                    <td>{parseFloat(el.main.temp_max - 273.15).toFixed(1)}&deg;C</td>
+                                    <td>{parseFloat(el.main.temp_min - 273.15).toFixed(1)}&deg;C</td>
                                 </tr>
                             ))}
                         </tbody>
