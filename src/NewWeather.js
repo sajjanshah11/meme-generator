@@ -92,8 +92,6 @@ const NewWeather = () =>{
                         id = "days"
                         type="number"
                         placeholder="Enter a Days to see the weather"
-                        min = "1"
-                        max = "40"
                         onKeyDown={setDays}
                     />
                 </div>
