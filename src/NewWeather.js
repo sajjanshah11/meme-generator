@@ -13,7 +13,7 @@ const NewWeather = () =>{
     const[currentWeather, setCurrentWeather] = React.useState("");
     const[weather4Data,setWeather4Data] = React.useState("");
     const[weather4,setWeather4] = React.useState("");
-    const[dayCount,setDayCount] = React.useState();
+    const[dayCount,setDayCount] = React.useState("");
 
     function callAPI(API_URL,params){
         return axios.get(API_BASE_URL + API_URL,{
@@ -31,14 +31,13 @@ const NewWeather = () =>{
         }
     }
 
-    function setDuration4(){
-        setApi("/forecast")
-        setWeather4(city)
-    }
-
     function setDays(event){
         if(event.key === "Enter"){
-            setDayCount(event.target.value)
+            if(event.target.value < 40 && event.target.value > 0){
+                setDayCount(event.target.value)
+            }else{
+                alert("please enter number between 1 to 40")
+            }
             setApi("/forecast");
         }
     }
@@ -96,7 +95,6 @@ const NewWeather = () =>{
                         min = "1"
                         max = "40"
                         onKeyDown={setDays}
-
                     />
                 </div>
             </div>
@@ -106,6 +104,7 @@ const NewWeather = () =>{
                      <ReactBootStrap.Table striped bordered hover>
                         <thead>
                             <tr>
+                                <th>Serial No.</th>
                                 <th>Humidity</th>
                                 <th>Pressure</th>
                                 <th>Temperature</th>
@@ -115,7 +114,8 @@ const NewWeather = () =>{
                         </thead>
                         <tbody>
                             { weather4Data?.list?.map((el,pos)=>(
-                                <tr key = {pos}>
+                                <tr key = {pos+1}>
+                                    <td>{pos}</td>
                                     <td>{el.main.humidity}%</td>
                                     <td>{el.main.pressure} Pa</td>
                                     <td>{parseFloat(el.main.temp - 273.15).toFixed(1)}&deg;C</td>
