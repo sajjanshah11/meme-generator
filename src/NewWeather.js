@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "./weather.css";
 import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
@@ -8,12 +8,12 @@ const API_BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 const NewWeather = () =>{
 
-    const[city,setCity] = React.useState("");
-    const[api,setApi] = React.useState("");
-    const[currentWeather, setCurrentWeather] = React.useState("");
-    const[weather4Data,setWeather4Data] = React.useState("");
-    const[weather4,setWeather4] = React.useState("");
-    const[dayCount,setDayCount] = React.useState("");
+    const[city,setCity] = useState("");
+    const[api,setApi] = useState("");
+    const[currentWeather, setCurrentWeather] = useState("");
+    const[weather4Data,setWeather4Data] = useState("");
+    // const[weather4,setWeather4] = useState("");
+    const[dayCount,setDayCount] = useState("");
 
     function callAPI(API_URL,params){
         return axios.get(API_BASE_URL + API_URL,{
@@ -42,7 +42,7 @@ const NewWeather = () =>{
         }
     }
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         if(city === '') return;
         callAPI(api,{q : city ,cnt : dayCount}).then((response)=>{
             if(api === '/weather'){
@@ -53,7 +53,7 @@ const NewWeather = () =>{
                 console.log(response.data)
             }
         })
-    },[city,weather4,dayCount])
+    },[city,dayCount])
 
     const currentWeatherList = currentWeather?.weather?.map((el,pos)=>(
         <div key = {pos}>
