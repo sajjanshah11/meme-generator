@@ -12,8 +12,12 @@ const NewWeather = () =>{
     const[api,setApi] = useState("");
     const[currentWeather, setCurrentWeather] = useState("");
     const[weather4Data,setWeather4Data] = useState("");
-    // const[weather4,setWeather4] = useState("");
     const[dayCount,setDayCount] = useState("");
+    const[message,setMessage] = useState("");
+    const[latitude,setLatitude] = useState("");
+    const[longitude,setLongitude] = useState("");
+    const[dataOneCall,setDataOneCall] = useState("");
+    const[toogle,setToogle] = useState(true)
 
     function callAPI(API_URL,params){
         return axios.get(API_BASE_URL + API_URL,{
@@ -25,57 +29,84 @@ const NewWeather = () =>{
     }
 
     function setCityName(event){
-        if(event.key === "Enter"){
             setCity(event.target.value)
-            setApi("/weather")
-        }
+            
+    }
+
+    function oneApiCall(lat, long){
+        setLatitude(lat);
+        setLongitude(long)
+        setApi('/onecall')
+    }
+    function searchHandler(){
+        setApi("/weather");
+        console.log("hi")
+        
+    }
+
+    function showDayWiseData(){
+        setApi("/forecast");
+        setToogle(prev => !prev);
     }
 
     function setDays(event){
-        if(event.key === "Enter"){
-            if(event.target.value < 40 && event.target.value > 0){
-                setDayCount(event.target.value)
-            }else{
-                alert("please enter number between 1 to 40")
-            }
-            setApi("/forecast");
+        if(event.target.value <= 40 && event.target.value > 0){
+            setDayCount(event.target.value)
+        }else{
+            setMessage("please enter number between 1 to 40")
         }
     }
 
     useEffect(()=>{
         if(city === '') return;
-        callAPI(api,{q : city ,cnt : dayCount}).then((response)=>{
-            if(api === '/weather'){
+        
+        if(api === "/weather"){
+            callAPI(api,{q : city ,cnt : dayCount}).then((response)=>{
                 setCurrentWeather(response.data)
-            }
-            if(api === '/forecast'){
+             
+            })
+        }else if(api === "/forecast"){
+            callAPI(api,{q : city ,cnt : dayCount}).then((response)=>{
                 setWeather4Data(response.data)
-                console.log(response.data)
-            }
-        })
-    },[city,dayCount])
+            }) 
+        }else if(api === "/onecall"){
+            callAPI(api,{lon:longitude, lat: latitude,cnt : dayCount}).then((response)=>{
+                setDataOneCall(response.data)
+            }) 
+        }
+        
+    },[api])
+
+    // console.log(currentWeather)
+    
+    let {coord} = currentWeather;
+    console.log(dataOneCall);
 
     const currentWeatherList = currentWeather?.weather?.map((el,pos)=>(
         <div key = {pos}>
             <h1>{el.description}</h1>
             <img
                 src = {"http://openweathermap.org/img/w/" + el.icon + ".png"} 
+                alt = "please check for internet connection"
             />
         </div>
     ))
 
-    console.log(currentWeather);
+    // console.log(currentWeather);
 
-    // console.log(weather4Data);
     return(
         <>
             <h2 className="main">Real Time Weather Application</h2>
                 <div className="search">
                     <input
+                        className = "searchTerm"
                         type="text"
                         placeholder="Enter your city to see the current weather"
-                        onKeyDown={setCityName}
+                        onChange={setCityName}
                     />
+                    <button type="submit" class="searchButton" onClick = {searchHandler}>
+                        Search.
+                    </button>
                 </div>
 
                 
@@ -84,21 +115,34 @@ const NewWeather = () =>{
                 <div className = "name-container">{city}</div>
                 {currentWeatherList}
             </div>
-
-            <div className = "flex-container">
-                <div>
-                    <h2>Enter the Number of days to see the weather forecast</h2>
-                    <input
-                        id = "days"
-                        type="number"
-                        placeholder="Enter a Days to see the weather"
-                        onKeyDown={setDays}
-                    />
+            <div className="form_wrapper">
+                <h2 id = "center">Enter the Number of days to see the weather forecast</h2>
+                <div className = "flex-container">
+                    <div>
+                        <input
+                            id = "days"
+                            type="number"
+                            placeholder="Enter the Days between 1 to 40"
+                            onChange={setDays}
+                        />
+                    </div>
+                    <p className = "error_message_box">{message}</p>
                 </div>
             </div>
 
+            <div className = "button-flex">
+                <button type="submit" onClick = {showDayWiseData} >
+                            5Day/3Hours.
+                </button>
+
+                <button type="button" onClick= {()=>oneApiCall(coord?.lat, coord?.lon)}>
+                            OneCall
+                </button>
+            </div>
+
+
             <div>
-                <div className = "four-container">
+                {toogle && <div className = "four-container">
                      <ReactBootStrap.Table striped bordered hover>
                         <thead>
                             <tr>
@@ -112,8 +156,8 @@ const NewWeather = () =>{
                         </thead>
                         <tbody>
                             { weather4Data?.list?.map((el,pos)=>(
-                                <tr key = {pos+1}>
-                                    <td>{pos}</td>
+                                <tr key = {pos}>
+                                    <td>{pos + 1}</td>
                                     <td>{el.main.humidity}%</td>
                                     <td>{el.main.pressure} Pa</td>
                                     <td>{parseFloat(el.main.temp - 273.15).toFixed(1)}&deg;C</td>
@@ -123,9 +167,35 @@ const NewWeather = () =>{
                             ))}
                         </tbody>
                      </ReactBootStrap.Table>
-                </div>
+                </div>}
+                
             </div>
 
+                {toogle && <div>
+                    <ReactBootStrap.Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Serial No.</th>
+                                    <th>Humidity</th>
+                                    <th>Pressure</th>
+                                    <th>Wind Speed</th>
+                                    <th>Wind Gust</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { dataOneCall?.daily?.map((el,pos)=>(
+                                    <tr key = {pos}>
+                                        <td>{pos + 1}</td>
+                                        <td>{el.humidity}%</td>
+                                        <td>{el.pressure} Pa</td>
+                                        <td>{el.wind_speed}</td>
+                                        <td>{el.wind_gust}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                    </ReactBootStrap.Table>
+                </div>}
+                
         </>
     )
 }
