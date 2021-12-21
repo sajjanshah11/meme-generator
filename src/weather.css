@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 
 body{
 background: #d53369;  
@@ -10,7 +10,19 @@ font-family: 'Roboto Slab', serif;
 .search{
     text-align: center;
 }
-button {
+.location_details {
+  color: #fff;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.city_name{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+/* button {
   background-color: blue;
   border: none;
   color: white;
@@ -33,18 +45,8 @@ input{
     display: inline-block;
     font-size: 16px;
     margin: 12px 2px;
-}
+} */
 
-.container{
-    position: fixed;
-    top: -66px;
-    right: 1rem;
-    height: 10rem;
-    width: 17rem;
-    display: block;
-    margin: auto;
-    margin-top: 4rem;
-}
 
 .main{
     text-align: center;
@@ -116,4 +118,9 @@ table{
   
   .button-flex button{
     margin-bottom: 2rem;
+  }
+
+  .one_call_error{
+    font-weight: bold;
+    color: red;
   }
