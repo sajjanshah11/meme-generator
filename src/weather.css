@@ -1,8 +1,8 @@
 
 
 body{
-background: #d53369;  
-background: -webkit-linear-gradient(to right, #cbad6d, #d53369);  
+/* background: #d53369;   */
+background: -webkit-linear-gradient(to right, #cbad6d, #eedae0);  
 background: linear-gradient(to right, #cbad6d, #d53369);
 font-family: 'Readex Pro', sans-serif;
 font-family: 'Roboto Slab', serif;
@@ -72,8 +72,7 @@ input{
 }
 .error_message_box {
   position: absolute;
-  left: 0;
-  bottom: -10px;
+  top: 2.5rem;
   /* border: 2px solid #f00; */
   width: 100%;
   color: red;
@@ -123,4 +122,8 @@ table{
   .one_call_error{
     font-weight: bold;
     color: red;
+  }
+
+  .day_error_wrapper{
+    position: relative;
   }

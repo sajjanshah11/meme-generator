@@ -17,6 +17,9 @@ const NewWeather = () => {
   const [dataOneCall, setDataOneCall] = useState("");
   const [toogle, setToogle] = useState(false);
   const[oneApiMessage, setOneApiMessage] = useState("");
+  const[currentWeatherToogle,setCurrentWeatherToogle] = React.useState(false)
+
+
 
   function callAPI(API_URL, params) {
     return axios.get(API_BASE_URL + API_URL, {
@@ -41,6 +44,7 @@ const NewWeather = () => {
   function searchHandler() {
     setApi("/weather");
     console.log("hi");
+    setCurrentWeatherToogle(prev => !prev)
   }
 
   function showDayWiseData() {
@@ -50,8 +54,8 @@ const NewWeather = () => {
 
   function setDays(event) {
     if (event.target.value <= 40 && event.target.value > 0) {
-      setMessage("");
       setDayCount(event.target.value);
+      setMessage("");
     } else {
       setMessage("please enter number between 1 to 40");
     }
@@ -84,6 +88,10 @@ const NewWeather = () => {
   console.log(longitude1)
   console.log(dataOneCall);
 
+    const { main } = currentWeather;
+
+    console.log(main?.temp)
+
   const currentWeatherList = currentWeather?.weather?.map((el, pos) => (
     <div key={pos}>
       <img
@@ -94,18 +102,18 @@ const NewWeather = () => {
     </div>
   ));
 
-  // console.log(currentWeather);
+  console.log(currentWeather);
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
         <div class="col-3">
           <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">Weather Application</span>
           </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-4">
           <div class="row">
             <div class="col-auto">
               <input
@@ -126,47 +134,56 @@ const NewWeather = () => {
             </div>
           </div>
         </div>
-
+        <div class = "col-2">
+            <div className = "day_error_wrapper">
+                <div>
+                    <input
+                    className = "form-control"
+                    type="number"
+                    placeholder="Enter the Days between 1 to 40"
+                    onChange={setDays}
+                    />
+                </div>
+                <p className="error_message_box">{message}</p>
+            </div>
+        </div>
         <div class="col-3">
             <div className="location_details">  
                 <span className="city_name"> {city} </span>
                 <span className = "weather-list"> 
                   {currentWeatherList} 
                 </span>
+                {/* <span>{parseFloat(main?.temp - 273.15.toFixed(1))}&deg;C</span> */}
             </div>
         </div>
       </nav>
 
-      <div className="form_wrapper">
-        <h2 id="center">
-          Enter the Number of days to see the weather forecast
-        </h2>
-        <div className="flex-container">
-          <div>
-            <input
-              id="days"
-              type="number"
-              placeholder="Enter the Days between 1 to 40"
-              onChange={setDays}
-            />
-          </div>
-          <p className="error_message_box">{message}</p>
-        </div>
-      </div>
+      
 
       <div className="button-flex">
-        <button type="submit" onClick={showDayWiseData}>
-          5Day/3Hours.
-        </button>
+
+        <button type="submit" onClick={showDayWiseData} className = "btn btn-primary mt-2"> 5Day/3Hours.</button>
 
         <div className = "one_call_container">
             <div>
-                <button type="button" onClick={oneApiCall}> OneCall </button>
+                <button type="button" onClick={oneApiCall} className = "btn btn-primary mt-2"> OneCall </button>
             </div>
             <div className = "one_call_error">{oneApiMessage}</div>
         </div>
       </div>
 
+        {
+            currentWeatherToogle && <div class="card w-50 mx-auto mb-3">
+            <div class="card-body">
+                <h3>Current Weather</h3>
+                <h5 class="card-title">{parseFloat(main?.temp - 273.15).toFixed(1)}&deg;C</h5>
+                <h5 class="card-title">{city}</h5>
+                {/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Button</a> */}
+            </div>
+        </div>
+        }
+        
       <div>
         {toogle && (
           <div className="four-container">
