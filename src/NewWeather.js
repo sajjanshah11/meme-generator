@@ -18,8 +18,10 @@ const NewWeather = () => {
   const [toogle, setToogle] = useState(false);
   const[oneApiMessage, setOneApiMessage] = useState("");
   const[currentWeatherToogle,setCurrentWeatherToogle] = React.useState(false)
+  const[dayFiveMessage,setDayFiveMessage] = React.useState("");
 
-
+    const headArray1 = ["Date","Time","Humidity", "Pressure","Temperature","Maximum Temperature","Minimum Temperature"]
+    const headArray2 = ["Time", "Humidity","Pressure", "Wind Speed", "Wind Gust"];
 
   function callAPI(API_URL, params) {
     return axios.get(API_BASE_URL + API_URL, {
@@ -43,12 +45,19 @@ const NewWeather = () => {
   }
   function searchHandler() {
     setApi("/weather");
-    console.log("hi");
+    // console.log("hi");
     setCurrentWeatherToogle(prev => !prev)
   }
 
   function showDayWiseData() {
-    setApi("/forecast");
+
+    if(city && dayCount){
+        setApi("/forecast");
+        setDayFiveMessage("")
+    } else {
+        setDayFiveMessage("day and city name is missing");
+    }
+    
     setToogle((prev) => !prev);
   }
 
@@ -75,7 +84,7 @@ const NewWeather = () => {
         setWeather4Data(response.data);
       });
     } else if (api === "/onecall") {
-      callAPI(api, { lon: longitude1, lat: latitude1, cnt: dayCount }).then(
+      callAPI(api, { lon: longitude1, lat: latitude1}).then(
         (response) => {
           setDataOneCall(response.data);
         }
@@ -83,14 +92,21 @@ const NewWeather = () => {
     }
   }, [api]);
 
+
+//   console.log(dataOneCall)
+
   console.log(currentWeather)
-  console.log(latitude1)
-  console.log(longitude1)
-  console.log(dataOneCall);
+//   console.log(latitude1)
+//   console.log(longitude1)
+//   console.log(dataOneCall);
+
+    // console.log(dayFiveMessage)
+
+
 
     const { main } = currentWeather;
 
-    console.log(main?.temp)
+    // console.log(main?.temp)
 
   const currentWeatherList = currentWeather?.weather?.map((el, pos) => (
     <div key={pos}>
@@ -102,7 +118,7 @@ const NewWeather = () => {
     </div>
   ));
 
-  console.log(currentWeather);
+//   console.log(currentWeather);
 
   return (
     <>
@@ -158,11 +174,14 @@ const NewWeather = () => {
         </div>
       </nav>
 
-      
-
       <div className="button-flex">
 
-        <button type="submit" onClick={showDayWiseData} className = "btn btn-primary mt-2"> 5Day/3Hours.</button>
+        <div className = "five_call_container">
+            <div>
+                <button type="submit" onClick={showDayWiseData} className = "btn btn-primary mt-2"> 5Day/3Hours.</button>
+            </div>
+            <div className = "five_call_error">{dayFiveMessage}</div>
+        </div>
 
         <div className = "one_call_container">
             <div>
@@ -175,9 +194,18 @@ const NewWeather = () => {
         {
             currentWeatherToogle && <div class="card w-50 mx-auto mb-3">
             <div class="card-body">
-                <h3>Current Weather</h3>
+                <h5>CURRENT WEATHER</h5>
+                <span>{new Date(currentWeather.dt).toLocaleTimeString("en-US")}</span>
+                <div className = "card_weather_list">{currentWeatherList}</div>
                 <h5 class="card-title">{parseFloat(main?.temp - 273.15).toFixed(1)}&deg;C</h5>
                 <h5 class="card-title">{city}</h5>
+                <div className = "list">
+                    <p>Humidity : {main?.humidity}</p>
+                    <p>Pressure : {main?.pressure}</p>
+                    <p>Sea Level : {main?.sea_level}</p>
+                    <p>Maximum Temperature : {main?.temp_max}</p>
+                    <p>Minimum Temperature : {main?.temp_min}</p>
+                </div>
                 {/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 <a href="#" class="btn btn-primary">Button</a> */}
             </div>
@@ -190,18 +218,16 @@ const NewWeather = () => {
             <ReactBootStrap.Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Serial No.</th>
-                  <th>Humidity</th>
-                  <th>Pressure</th>
-                  <th>Temperature</th>
-                  <th>Maximum Temperature</th>
-                  <th>Minimum Temperature</th>
+                    {headArray1.map((el)=>(
+                        <th>{el}</th>
+                    ))}
                 </tr>
               </thead>
               <tbody>
                 {weather4Data?.list?.map((el, pos) => (
                   <tr key={pos}>
-                    <td>{pos + 1}</td>
+                    <td>{el.dt_txt.split(" ")[0]}</td>
+                    <td>{el.dt_txt.split(" ")[1]}</td>
                     <td>{el.main.humidity}%</td>
                     <td>{el.main.pressure} Pa</td>
                     <td>
@@ -226,17 +252,17 @@ const NewWeather = () => {
           <ReactBootStrap.Table striped bordered hover>
             <thead>
               <tr>
-                <th>Serial No.</th>
-                <th>Humidity</th>
-                <th>Pressure</th>
-                <th>Wind Speed</th>
-                <th>Wind Gust</th>
+                {
+                    headArray2.map((item)=>(
+                        <th>{item}</th>
+                    ))
+                }
               </tr>
             </thead>
             <tbody>
               {dataOneCall?.daily?.map((el, pos) => (
                 <tr key={pos}>
-                  <td>{pos + 1}</td>
+                  <td>{new Date(el.dt).toLocaleTimeString("en-US")}</td>
                   <td>{el.humidity}%</td>
                   <td>{el.pressure} Pa</td>
                   <td>{el.wind_speed}</td>

@@ -127,3 +127,23 @@ table{
   .day_error_wrapper{
     position: relative;
   }
+
+  .five_call_container{
+    position: relative;
+  }
+
+  .five_call_error{
+    color: red;
+    font-weight: bold;
+  }
+
+  .card-body{
+    position: relative;
+  }
+
+  .list{
+    position: absolute;
+    top: 0.5rem;
+    right: 3rem;
+
+  }
