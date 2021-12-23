@@ -15,9 +15,7 @@ const NewWeather = () => {
   const [latitude1, setLatitude1] = useState("");
   const [longitude1, setLongitude1] = useState("");
   const [dataOneCall, setDataOneCall] = useState("");
-  const [toogle, setToogle] = useState(false);
   const[oneApiMessage, setOneApiMessage] = useState("");
-  const[currentWeatherToogle,setCurrentWeatherToogle] = React.useState(false)
   const[dayFiveMessage,setDayFiveMessage] = React.useState("");
 
     const headArray1 = ["Date","Time","Humidity", "Pressure","Temperature","Maximum Temperature","Minimum Temperature"]
@@ -45,39 +43,44 @@ const NewWeather = () => {
   }
   function searchHandler() {
     setApi("/weather");
-    // console.log("hi");
-    setCurrentWeatherToogle(prev => !prev)
+    console.log("hi");
+    // setCurrentWeatherToogle(prev => !prev)
   }
 
   function showDayWiseData() {
 
     if(city && dayCount){
         setApi("/forecast");
-        setDayFiveMessage("")
-    } else {
-        setDayFiveMessage("day and city name is missing");
+        setDayFiveMessage("") 
     }
-    
-    setToogle((prev) => !prev);
+     else {
+        setDayFiveMessage("day and city name is missing");
+    }    
+    // setToogle((prev) => !prev);
   }
 
   function setDays(event) {
     if (event.target.value <= 40 && event.target.value > 0) {
       setDayCount(event.target.value);
       setMessage("");
-    } else {
+    } else if(event.target.value === ""){
+      setMessage("")
+    }
+    else {
       setMessage("please enter number between 1 to 40");
     }
   }
 
   useEffect(() => {
     if (city === "") return;
-
+    console.log(city)
     if (api === "/weather") {
       callAPI(api, { q: city, cnt: dayCount }).then((response) => {
         setCurrentWeather(response.data);
+        console.log("function from call API");
         setLatitude1(response.data.coord.lat);
         setLongitude1(response.data.coord.lon);
+        setApi("")
       });
     } else if (api === "/forecast") {
       callAPI(api, { q: city, cnt: dayCount }).then((response) => {
@@ -92,21 +95,9 @@ const NewWeather = () => {
     }
   }, [api]);
 
-
-//   console.log(dataOneCall)
-
-  console.log(currentWeather)
-//   console.log(latitude1)
-//   console.log(longitude1)
-//   console.log(dataOneCall);
-
-    // console.log(dayFiveMessage)
+  const { main } = currentWeather;
 
 
-
-    const { main } = currentWeather;
-
-    // console.log(main?.temp)
 
   const currentWeatherList = currentWeather?.weather?.map((el, pos) => (
     <div key={pos}>
@@ -118,7 +109,7 @@ const NewWeather = () => {
     </div>
   ));
 
-//   console.log(currentWeather);
+
 
   return (
     <>
@@ -191,8 +182,7 @@ const NewWeather = () => {
         </div>
       </div>
 
-        {
-            currentWeatherToogle && <div class="card w-50 mx-auto mb-3">
+         <div className={`card w-50 mx-auto mb-3 ${!currentWeatherList ? 'd-none' : ''}`}>
             <div class="card-body">
                 <h5>CURRENT WEATHER</h5>
                 <span>{new Date(currentWeather.dt).toLocaleTimeString("en-US")}</span>
@@ -210,11 +200,10 @@ const NewWeather = () => {
                 <a href="#" class="btn btn-primary">Button</a> */}
             </div>
         </div>
-        }
         
-      <div>
-        {toogle && (
-          <div className="four-container">
+        
+      
+          <div className= {`four-container ${!weather4Data ? 'd-none' : ''}`}>
             <ReactBootStrap.Table striped bordered hover>
               <thead>
                 <tr>
@@ -244,11 +233,10 @@ const NewWeather = () => {
               </tbody>
             </ReactBootStrap.Table>
           </div>
-        )}
-      </div>
+        
 
-      {toogle && (
-        <div>
+      
+        <div className = {`${!dataOneCall ? 'd-none' : ''}`}>
           <ReactBootStrap.Table striped bordered hover>
             <thead>
               <tr>
@@ -272,7 +260,7 @@ const NewWeather = () => {
             </tbody>
           </ReactBootStrap.Table>
         </div>
-      )}
+      
     </>
   );
 };
