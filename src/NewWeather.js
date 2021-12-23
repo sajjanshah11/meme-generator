@@ -31,6 +31,10 @@ const NewWeather = () => {
   }
 
   function setCityName(event) {
+    if(event.target.value){
+        setDayFiveMessage("")
+        setOneApiMessage("")
+    }
     setCity(event.target.value);
   }
 
@@ -51,7 +55,8 @@ const NewWeather = () => {
 
     if(city && dayCount){
         setApi("/forecast");
-        setDayFiveMessage("") 
+        setDayFiveMessage("")
+        setOneApiMessage("")
     }
      else {
         setDayFiveMessage("day and city name is missing");
