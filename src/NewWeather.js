@@ -19,7 +19,7 @@ const NewWeather = () => {
   const [dataOneCall, setDataOneCall] = useState("");
   const[oneApiMessage, setOneApiMessage] = useState("");
   const[dayFiveMessage,setDayFiveMessage] = useState("");
-  const[toogle, setToogle] =  useState("")
+  const[toogle, setToogle] =  useState("");
 
     const headArray1 = ["Date","Time","Humidity", "Pressure","Temperature","Maximum Temperature","Minimum Temperature"]
     const headArray2 = ["Time", "Humidity","Pressure", "Wind Speed", "Wind Gust"];
@@ -85,6 +85,7 @@ const NewWeather = () => {
       setDayFiveMessage("")
     } else if(event.target.value === ""){
       setMessage("")
+      setDayCount("")
     }
     else {
       setMessage("please enter days between 1 to 40");
@@ -115,9 +116,7 @@ const NewWeather = () => {
     }
   }, [api]);
 
-  const { main } = currentWeather;
-
-
+   
 
   const currentWeatherList = currentWeather?.weather?.map((el, pos) => (
     <div key={pos}>
@@ -129,7 +128,22 @@ const NewWeather = () => {
     </div>
   ));
 
+  // console.log(currentWeather)
 
+  const { main, weather } = currentWeather;
+
+  // const { weather } = currentWeather;
+
+    // console.log(weather)
+    // if(weather?.length){
+    //    console.log(weather[0]?.icon);
+    // }
+
+    // console.log(weather)
+
+    // console.log(icon)
+
+    console.log(main?.temp)
 
   return (
     <>
@@ -202,12 +216,13 @@ const NewWeather = () => {
         </div>
       </div>
 
-      <WeatherMap
+      {
+        weather?.length && <WeatherMap
         lat = {latitude1}
         lng = {longitude1}
+        iconmarker = {"http://openweathermap.org/img/w/" + weather[0].icon + ".png"}
       />
-
-
+      }
          <div className={`card w-50 mx-auto mb-3 ${!currentWeatherList ? 'd-none' : ''}`}>
             <div class="card-body">
                 <h5>CURRENT WEATHER</h5>

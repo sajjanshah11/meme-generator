@@ -1,10 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import { GoogleMap, LoadScript,Marker } from '@react-google-maps/api';
 
 const WeatherMap = (props) => {
 
-  console.log(props)
+  // console.log(props.iconmarker)
+
   
+
   const mapStyles = {        
     height: "60vh",
     width: "50%",
@@ -21,7 +23,10 @@ const WeatherMap = (props) => {
         {
             props.lat &&
             ( 
-              <Marker position={props} />
+              <Marker 
+                position={{lat:props.lat , lng:props.lng}} 
+                icon = {props.iconmarker}
+              />
             ) 
         }
 
