@@ -23,12 +23,7 @@ const NewWeather = () => {
 
     const headArray1 = ["Date","Time","Humidity", "Pressure","Temperature","Maximum Temperature","Minimum Temperature"]
     const headArray2 = ["Time", "Humidity","Pressure", "Wind Speed", "Wind Gust"];
-
-  // function toogleHandler(){
-  //   setToogle(prev => !prev)
-  // }
- 
-
+    
   function callAPI(API_URL, params) {
     return axios.get(API_BASE_URL + API_URL, {
       params: {
@@ -57,9 +52,7 @@ const NewWeather = () => {
   }
   function searchHandler() {
     setApi("/weather");
-    setOneApiMessage("")
-
-    // setCurrentWeatherToogle(prev => !prev)
+    setOneApiMessage("");
   }
 
   function showDayWiseData() {
@@ -139,7 +132,7 @@ const NewWeather = () => {
     //    console.log(weather[0]?.icon);
     // }
 
-    // console.log(weather)
+    console.log(weather)
 
     // console.log(icon)
 
@@ -216,31 +209,47 @@ const NewWeather = () => {
         </div>
       </div>
 
-      {
-        weather?.length && <WeatherMap
-        lat = {latitude1}
-        lng = {longitude1}
-        iconmarker = {"http://openweathermap.org/img/w/" + weather[0].icon + ".png"}
-      />
-      }
-         <div className={`card w-50 mx-auto mb-3 ${!currentWeatherList ? 'd-none' : ''}`}>
+      <div className = "one-container">
+          <div className = "weather-map">
+            {
+              weather?.length && <WeatherMap
+              lat = {latitude1}
+              lng = {longitude1}
+              iconmarker = {"http://openweathermap.org/img/w/" + weather[0].icon + ".png"}
+              description = {weather[0].description}
+              />
+            }
+          </div>
+
+          <div className={`card w-50 mx-auto m-4  ${!currentWeatherList ? 'd-none' : ''}`}>
             <div class="card-body">
-                <h5>CURRENT WEATHER</h5>
-                <span>{new Date(currentWeather.dt).toLocaleTimeString("en-US")}</span>
-                <div className = "card_weather_list">{currentWeatherList}</div>
-                <h5 class="card-title">{parseFloat(main?.temp - 273.15).toFixed(1)}&deg;C</h5>
-                <h5 class="card-title">{city}</h5>
+                <div className = "left">
+                  <h5>CURRENT WEATHER</h5>
+                  <hr />
+                  <span>{new Date(currentWeather.dt).toLocaleTimeString("en-US")}</span>
+                  <hr />
+                  <div className = "card_weather_list">{currentWeatherList}</div>
+                  <hr />
+                  <h5 class="card-title">{parseFloat(main?.temp - 273.15).toFixed(1)}&deg;C</h5>
+                  <hr />
+                  <h5 class="card-title">{city}</h5>
+                  <hr />
+                </div>
                 <div className = "list">
                     <p>Humidity : {main?.humidity}</p>
+                    <hr />
                     <p>Pressure : {main?.pressure}</p>
+                    <hr />
                     <p>Sea Level : {main?.sea_level}</p>
+                    <hr />
                     <p>Maximum Temperature : {main?.temp_max}</p>
+                    <hr />
                     <p>Minimum Temperature : {main?.temp_min}</p>
+                    <hr />
                 </div>
-                {/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Button</a> */}
             </div>
-        </div>
+          </div>
+      </div>
 
           {toogle === "five" && <div className= {`four-container ${!weather4Data ? 'd-none' : ''}`}>
             <ReactBootStrap.Table striped bordered hover>

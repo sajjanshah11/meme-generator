@@ -1,9 +1,8 @@
 
-
 body{
-/* background: #d53369;   */
-background: -webkit-linear-gradient(to right, #cbad6d, #eedae0);  
-background: linear-gradient(to right, #cbad6d, #d53369);
+background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 font-family: 'Readex Pro', sans-serif;
 font-family: 'Roboto Slab', serif;
 }
@@ -22,30 +21,7 @@ font-family: 'Roboto Slab', serif;
 }
 
 
-/* button {
-  background-color: blue;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-input{
-    height: 28px;
-    width: 21rem;
-    order: none;
-    color: blue;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 12px 2px;
-} */
+
 
 
 .main{
@@ -143,7 +119,21 @@ table{
 
   .list{
     position: absolute;
-    top: 0.5rem;
+    top: 2rem;
     right: 3rem;
+  }
 
+  .one-container{
+    display: flex;
+  }
+
+  .weather-map{
+    flex: 0 0 50%;
+    padding:1.5rem
+  }
+
+  .left{
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
   }

@@ -3,14 +3,12 @@ import { GoogleMap, LoadScript,Marker } from '@react-google-maps/api';
 
 const WeatherMap = (props) => {
 
-  // console.log(props.iconmarker)
-
-  
-
+  console.log(props.description)
   const mapStyles = {        
-    height: "60vh",
-    width: "50%",
-    marginLeft:"25rem"
+    height: "50vh",
+    width: "100%",
+    // marginLeft:"25rem",
+    // marginBottom:"5rem"
     };
   return (
      <LoadScript
@@ -26,6 +24,7 @@ const WeatherMap = (props) => {
               <Marker 
                 position={{lat:props.lat , lng:props.lng}} 
                 icon = {props.iconmarker}
+                label = {props.description}
               />
             ) 
         }
