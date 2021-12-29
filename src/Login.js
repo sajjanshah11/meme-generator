@@ -50,9 +50,6 @@ const Login = () =>{
            }else {
                alert(data.message)
            }
-
-            
-
             // setLoading(false)
         }catch(error){
             console.log(error)
@@ -60,7 +57,7 @@ const Login = () =>{
 
         }
     }
-    console.log(error)
+    // console.log(error)
     return(
         <> 
             <div className = "main-login">

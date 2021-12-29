@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./weather.css";
 import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
-import WeatherMap from "./WeatherMap"
+import WeatherMap from "./WeatherMap";
+import { useHistory } from "react-router-dom";
 
 
 const API_BASE_URL = "https://api.openweathermap.org/data/2.5";
@@ -21,6 +22,8 @@ const NewWeather = () => {
   const[dayFiveMessage,setDayFiveMessage] = useState("");
   const[toogle, setToogle] =  useState("");
 
+  let history = useHistory();
+
     const headArray1 = ["Date","Time","Humidity", "Pressure","Temperature","Maximum Temperature","Minimum Temperature"]
     const headArray2 = ["Time", "Humidity","Pressure", "Wind Speed", "Wind Gust"];
     
@@ -31,6 +34,11 @@ const NewWeather = () => {
         APPID: "57d277927c76ef5e55af9e48d8425fed",
       },
     });
+  }
+
+  function logoutHandler(){
+    localStorage.clear();
+    history.push('/')
   }
 
   function setCityName(event) {
@@ -190,7 +198,9 @@ const NewWeather = () => {
                 {/* <span>{parseFloat(main?.temp - 273.15.toFixed(1))}&deg;C</span> */}
             </div>
         </div>
-      </nav>
+      </nav> 
+
+        
 
       <div className="button-flex">
 
@@ -206,6 +216,10 @@ const NewWeather = () => {
                 <button type="button" onClick={oneApiCall} className = "btn btn-primary mt-2"> OneCall </button>
             </div>
             <div className = "one_call_error">{oneApiMessage}</div>
+        </div>
+
+        <div>
+          <button className = "btn btn-danger mt-2" onClick = {logoutHandler}>LOGOUT</button>
         </div>
       </div>
 

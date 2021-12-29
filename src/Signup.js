@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 
 const Signup = ()=>{
@@ -11,10 +12,13 @@ const Signup = ()=>{
     const[confirmpassword,setConfirmpassword] = useState("");
     const[message,setMessage] = useState(null);
 
+    let history = useHistory();
+
     async function submitHandler(e){
         e.preventDefault();
         if(password !== confirmpassword){
             setMessage("Password do not match");
+            alert("password do not match")
         }else {
             setMessage(null)
 
@@ -31,12 +35,20 @@ const Signup = ()=>{
                 config
             );
 
-            localStorage.setItem("name",data.name)
-            localStorage.setItem("email",data.email)
-            localStorage.setItem("id",data._id)
-            localStorage.setItem("token",data.token)
+            console.log(data.status)
 
-            console.log(data)
+            if(data.status === "success"){
+                // localStorage.setItem("name",data.name)
+                // localStorage.setItem("email",data.email)
+                // localStorage.setItem("id",data._id)
+                // localStorage.setItem("token",data.token)
+
+                history.push('/')
+            }else {
+                alert(data.message)
+            }
+
+            // console.log(data)
             } catch (error) {
                 console.log(error.message)
             }
