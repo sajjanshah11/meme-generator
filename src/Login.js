@@ -1,12 +1,27 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios"
+import "./weather.css";
+import  { Redirect } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 const Login = () =>{
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [error,setError] = useState("");
-    const[loading,setLoading]  = useState(false)
+    const[loading,setLoading]  = useState(false);
+
+    let history = useHistory();
+
+    useEffect(()=>{
+        const email = localStorage.getItem("email")
+        const token = localStorage.getItem("token")
+        console.log(token,email)
+        if(!!email && !!token){  
+            console.log("hi"); 
+             history.push('/main')
+        } 
+    },[])
 
     async function submitHandler(e){
         e.preventDefault();
@@ -26,7 +41,17 @@ const Login = () =>{
             config
             );
 
-            console.log(data)
+           if(data.status === "success"){
+                localStorage.setItem("email",data.email)
+                localStorage.setItem("id",data._id)
+                localStorage.setItem("token",data.token)
+
+                history.push("/main")
+           }else {
+               alert(data.message)
+           }
+
+            
 
             // setLoading(false)
         }catch(error){
@@ -38,40 +63,43 @@ const Login = () =>{
     console.log(error)
     return(
         <> 
-            <h1>LOGIN</h1>
-             <form onSubmit = {submitHandler}>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input 
-                        type="email" 
-                        value = {email}
-                        class="form-control" 
-                        id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" 
-                        onChange = {(e)=>setEmail(e.target.value)}
-
-                        />
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input 
-                        type="password" 
-                        value = {password}
-                        class="form-control" 
-                        id="exampleInputPassword1"
-                        onChange = {(e)=>setPassword(e.target.value)}
-                     />
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Login</button>
-               
-            </form>
-            <div className="py-3">
+            <div className = "main-login">
                 <div>
-                    New Customer ? <Link to="/signup">Register Here</Link>
+                    <h1>LOGIN</h1>
+                    <form onSubmit = {submitHandler}>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input 
+                                type="email" 
+                                value = {email}
+                                class="form-control" 
+                                id="exampleInputEmail1" 
+                                aria-describedby="emailHelp" 
+                                onChange = {(e)=>setEmail(e.target.value)}
+
+                                />
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input 
+                                type="password" 
+                                value = {password}
+                                class="form-control" 
+                                id="exampleInputPassword1"
+                                onChange = {(e)=>setPassword(e.target.value)}
+                            />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    
+                    </form>
+
+                    <div>
+                        New Customer ? <Link to="/signup">Register Here</Link>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </>
     )
 }

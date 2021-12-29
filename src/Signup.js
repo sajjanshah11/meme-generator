@@ -31,6 +31,11 @@ const Signup = ()=>{
                 config
             );
 
+            localStorage.setItem("name",data.name)
+            localStorage.setItem("email",data.email)
+            localStorage.setItem("id",data._id)
+            localStorage.setItem("token",data.token)
+
             console.log(data)
             } catch (error) {
                 console.log(error.message)
@@ -41,58 +46,65 @@ const Signup = ()=>{
     console.log(message)
 
     return(
-        <>
-            <h1>SIGNUP</h1>
-            <form onSubmit = {submitHandler}>
-                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label"> Name </label>
-                    <input 
-                        type="name" 
-                        value = {name}
-                        class="form-control" 
-                        id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" 
-                        onChange = {(e) => setName(e.target.value)}
-                        />
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input 
-                        type="email" 
-                        value = {email}
-                        class="form-control" 
-                        id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" 
-                        onChange = {(e) => setEmail(e.target.value)}
-                        />
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input 
-                        type="password" 
-                        value = {password}
-                        class="form-control" 
-                        id="exampleInputPassword1"
-                        onChange = {(e) => setPassword(e.target.value)} 
-                    />
-                </div>
-                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                    <input 
-                        type="password" 
-                        value = {confirmpassword}
-                        class="form-control" 
-                        id="exampleInputPassword1" 
-                        onChange = {(e) => setConfirmpassword(e.target.value)}
-                    />
-                </div>
+        <>  
+            <div className = "main-login">
+                 <div>
+                    <h1>SIGNUP</h1>
+                    <form onSubmit = {submitHandler}>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label"> Name </label>
+                            <input 
+                                type="name" 
+                                value = {name}
+                                class="form-control" 
+                                id="exampleInputEmail1" 
+                                aria-describedby="emailHelp" 
+                                onChange = {(e) => setName(e.target.value)}
+                                />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input 
+                                type="email" 
+                                value = {email}
+                                class="form-control" 
+                                id="exampleInputEmail1" 
+                                aria-describedby="emailHelp" 
+                                onChange = {(e) => setEmail(e.target.value)}
+                                />
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input 
+                                type="password" 
+                                value = {password}
+                                class="form-control" 
+                                id="exampleInputPassword1"
+                                onChange = {(e) => setPassword(e.target.value)} 
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                value = {confirmpassword}
+                                class="form-control" 
+                                id="exampleInputPassword1" 
+                                onChange = {(e) => setConfirmpassword(e.target.value)}
+                            />
+                        </div>
 
-                <button 
-                type="submit" 
-                class="btn btn-primary"
-                >Signup</button>
-            </form>
+                        <button 
+                        type="submit" 
+                        class="btn btn-primary"
+                        >Submit</button>
+                    </form>
+                    <Link to = "/"> 
+                        <button className = "btn btn-primary mt-2">Login</button>
+                    </Link>
+                </div>
+            </div>
         </>
     )
 }

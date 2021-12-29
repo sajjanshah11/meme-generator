@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link,
   useRouteMatch,
   useParams
 } from "react-router-dom";
@@ -18,16 +19,17 @@ const App = () => {
     <>
       <Router>
         <Switch>
-          <Route path = "/" exact >
+          <Route exact path = "/" >
+            <Login />
+          </Route>
+          <Route  path = "/main" >
             <NewWeather />
           </Route>
           <Route path = "/signup" >
             <Signup />
           </Route>
-          <Route path = "/login" >
-            <Login />
-          </Route>
         </Switch>
+
       </Router>
       
     </>
