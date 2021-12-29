@@ -45,8 +45,9 @@ const loginUser = asyncHandler(async(req,res) => {
             token:generateToken(user._id)
         })
     }else {
-        res.status(201)
-        throw new Error("Invalid Email and password!")
+        // res.status(201)
+        // throw new Error("Invalid Email and password!")
+        res.json({status:'error',user:false,message:"Invalid Email and Password"})
     }
    
 })
