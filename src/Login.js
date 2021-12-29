@@ -6,28 +6,33 @@ const Login = () =>{
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [error,setError] = useState("");
-    const[loading,setLoading]  = useState()
+    const[loading,setLoading]  = useState(false)
 
     async function submitHandler(e){
         e.preventDefault();
-        try {
+        // console.log(email,password)
+        try{
             const config = {
-                headers:{
-                    "Content-type" : "application/json"
-                }
-            }       
-            const { data } = await axios.get('http://localhost:4000/api/user/login',{
-                // headers:{
-                //     "email":"krishna1@gmail.com",
-                //     "password":"12345",
-                //     "Content-type" : "application/json"
-                // }
-            })
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+
+            // setLoading(true)    
+
+            const { data } = await axios.post(
+            "/api/user/login",
+            { email, password },
+            config
+            );
+
             console.log(data)
-            
-        } catch (error) {
-            console.log(error.message)
+
+            // setLoading(false)
+        }catch(error){
+            console.log(error)
             setError(error.response.data.message)
+
         }
     }
     console.log(error)
@@ -58,7 +63,9 @@ const Login = () =>{
                         onChange = {(e)=>setPassword(e.target.value)}
                      />
                 </div>
+                
                 <button type="submit" class="btn btn-primary">Login</button>
+               
             </form>
             <div className="py-3">
                 <div>

@@ -18,13 +18,13 @@ const App = () => {
     <>
       <Router>
         <Switch>
-          <Route path = "/" exact>
+          <Route path = "/" exact >
             <NewWeather />
           </Route>
-          <Route path = "/signup" exact>
+          <Route path = "/signup" >
             <Signup />
           </Route>
-          <Route path = "/login" exact>
+          <Route path = "/login" >
             <Login />
           </Route>
         </Switch>
