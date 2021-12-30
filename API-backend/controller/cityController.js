@@ -1,27 +1,25 @@
 const City = require('../models/cityModel');
 const User = require('../models/cityModel')
+const asyncHandler = require('express-async-handler');
 
-const saveCityName = (req,res)=>{
+const saveCityName = asyncHandler(async(req,res)=>{
 
-        console.log(req.body);
-        const cityObj = new City({
-            userId: req.body.userId,
-            city:req.body.city,
-            email:req.body.email
-        })
+    const { userId,city,email } = req.body;
 
-        console.log(cityObj,"data to be saved")
-        //return false
-     cityObj.save().then(result => {
+    const cityObj = await City.create({userId,city,email})
+
+    if(cityObj){
         res.status(201).json({
-            message:"city name stored"
+            _id:cityObj._id,
+            userId:cityObj.userId,
+            city:cityObj.city,
+            email:cityObj.email,
+            status:"city name stored"
         })
-    }).catch(err => {
-        res.status(500).json({
-            error:err
-        })
-    })
-}
+    }else {
+         res.json({status:'error',user:false,message:"city name not saved"})
+    }
+})
 
 
 module.exports = saveCityName;
