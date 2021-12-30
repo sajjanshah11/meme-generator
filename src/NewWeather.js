@@ -86,11 +86,15 @@ const NewWeather = () => {
   function showDayWiseData() {
 
     if(city && dayCount){
+        // console.log(dayCount)
         setApi("/forecast");
         setDayFiveMessage("")
     } else if(!city){
       setDayFiveMessage("city name is missing");
-    } else if(!dayCount){
+    }else if(dayCount === null){
+      setDayFiveMessage("day count is higher , please check!")
+    } 
+    else if(!dayCount){
       setDayFiveMessage("day is missing")
     }
      else {
@@ -100,7 +104,9 @@ const NewWeather = () => {
   }
 
   function setDays(event) {
+    // console.log(event.target.value)
     if (event.target.value <= 40 && event.target.value > 0) {
+      // console.log("greater than 40")
       setDayCount(event.target.value);
       setMessage("");
       setDayFiveMessage("")
@@ -110,9 +116,11 @@ const NewWeather = () => {
     }
     else {
       setMessage("please enter days between 1 to 40");
+      setDayCount(null)
     }
   }
 
+  console.log(dayCount)
 
   useEffect(() => {
     if (city === "") return;
@@ -153,7 +161,7 @@ const NewWeather = () => {
 
   const { main, weather } = currentWeather;
 
-  console.log(city)
+  // console.log(city)
 
   return (
     <>

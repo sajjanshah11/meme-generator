@@ -17,7 +17,7 @@ const saveCityName = asyncHandler(async(req,res)=>{
             status:"city name stored"
         })
     }else {
-         res.json({status:'error',user:false,message:"city name not saved"})
+         res.status(500).json({status:'error',message:"city name not saved"})
     }
 })
 

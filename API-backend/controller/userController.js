@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async(req,res) => {
             status:"success"
         })
     } else {
-        res.json({status:'error',user:false,message:"error occured"})
+        res.status(500).json({status:'error',user:false,message:"error occured"})
     }
 })
 

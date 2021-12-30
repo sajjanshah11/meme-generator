@@ -16,10 +16,7 @@ const Signup = ()=>{
 
     async function submitHandler(e){
         e.preventDefault();
-        if(!name && !email && !password){
-            alert("please fill the form and click on submit")
-        }
-        else if(password !== confirmpassword){
+        if(password !== confirmpassword){
             setMessage("Password do not match");
             alert("password do not match")
         }else {
@@ -77,6 +74,7 @@ const Signup = ()=>{
                                 id="exampleInputEmail1" 
                                 aria-describedby="emailHelp" 
                                 onChange = {(e) => setName(e.target.value)}
+                                required
                                 />
                         </div>
                         <div class="mb-3">
@@ -88,6 +86,7 @@ const Signup = ()=>{
                                 id="exampleInputEmail1" 
                                 aria-describedby="emailHelp" 
                                 onChange = {(e) => setEmail(e.target.value)}
+                                required
                                 />
                             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
@@ -99,6 +98,7 @@ const Signup = ()=>{
                                 class="form-control" 
                                 id="exampleInputPassword1"
                                 onChange = {(e) => setPassword(e.target.value)} 
+                                required
                             />
                         </div>
                         <div class="mb-3">
@@ -109,6 +109,7 @@ const Signup = ()=>{
                                 class="form-control" 
                                 id="exampleInputPassword1" 
                                 onChange = {(e) => setConfirmpassword(e.target.value)}
+                                required
                             />
                         </div>
 
@@ -120,7 +121,7 @@ const Signup = ()=>{
                     <div className = "parent">
                             Already User ?   
                             <Link to = "/"> 
-                                <button className = "btn btn-primary mt-2">Login</button> 
+                                login 
                             </Link>
                     </div>
                     
