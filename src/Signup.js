@@ -53,10 +53,17 @@ const Signup = ()=>{
     console.log(message)
 
     return(
-        <>  
+        <> 
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+                <div class="col-3">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0 h1">Weather Application</span>
+                    </div>
+                </div>
+            </nav>
             <div className = "main-login">
                  <div>
-                    <h1>SIGNUP</h1>
+                    <h1>Register</h1>
                     <form onSubmit = {submitHandler}>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label"> Name </label>
