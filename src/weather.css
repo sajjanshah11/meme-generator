@@ -139,6 +139,21 @@ table{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
 
+  .login{
+    border: 1px solid #ac6a6a;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .center1{
+    text-align: center;
+  }
+
+  .parent{
+    position: absolute;
+    right: 32px;
+    bottom: 27px;
+  }

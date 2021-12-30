@@ -68,8 +68,8 @@ const Login = () =>{
                 </div>
             </nav>
                 <div className = "main-login">
-                    <div>
-                        <h1>Login</h1>
+                    <div className = "login">
+                        <h1 className = "center1">Login</h1>
                         <form onSubmit = {submitHandler}>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>

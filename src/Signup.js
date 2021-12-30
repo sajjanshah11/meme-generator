@@ -16,7 +16,10 @@ const Signup = ()=>{
 
     async function submitHandler(e){
         e.preventDefault();
-        if(password !== confirmpassword){
+        if(!name && !email && !password){
+            alert("please fill the form and click on submit")
+        }
+        else if(password !== confirmpassword){
             setMessage("Password do not match");
             alert("password do not match")
         }else {
@@ -62,8 +65,8 @@ const Signup = ()=>{
                 </div>
             </nav>
             <div className = "main-login">
-                 <div>
-                    <h1>Register</h1>
+                 <div className = "login">
+                    <h1 className = "center1">Register</h1>
                     <form onSubmit = {submitHandler}>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label"> Name </label>
@@ -114,9 +117,13 @@ const Signup = ()=>{
                         class="btn btn-primary"
                         >Submit</button>
                     </form>
-                    <Link to = "/"> 
-                        Already User ? <button className = "btn btn-primary mt-2">Login</button>
-                    </Link>
+                    <div className = "parent">
+                            Already User ?   
+                            <Link to = "/"> 
+                                <button className = "btn btn-primary mt-2">Login</button> 
+                            </Link>
+                    </div>
+                    
                 </div>
             </div>
         </>
