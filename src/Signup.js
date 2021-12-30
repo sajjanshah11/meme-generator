@@ -38,11 +38,6 @@ const Signup = ()=>{
             console.log(data.status)
 
             if(data.status === "success"){
-                // localStorage.setItem("name",data.name)
-                // localStorage.setItem("email",data.email)
-                // localStorage.setItem("id",data._id)
-                // localStorage.setItem("token",data.token)
-
                 history.push('/')
             }else {
                 alert(data.message)
@@ -113,7 +108,7 @@ const Signup = ()=>{
                         >Submit</button>
                     </form>
                     <Link to = "/"> 
-                        <button className = "btn btn-primary mt-2">Login</button>
+                        Already User ? <button className = "btn btn-primary mt-2">Login</button>
                     </Link>
                 </div>
             </div>

@@ -58,9 +58,29 @@ const NewWeather = () => {
     
     setToogle("one");
   }
-  function searchHandler() {
+  async function searchHandler() {
     setApi("/weather");
     setOneApiMessage("");
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        }
+      }
+
+
+      let callData = {
+        city : city,
+        userId : localStorage.getItem("id"),
+        email: localStorage.getItem("email")
+      }
+      const response = await axios.post("/api/location/city", callData,config) 
+
+    } catch (error) {
+      console.log(error.message)
+    }
+
   }
 
   function showDayWiseData() {
@@ -92,6 +112,7 @@ const NewWeather = () => {
       setMessage("please enter days between 1 to 40");
     }
   }
+
 
   useEffect(() => {
     if (city === "") return;
@@ -129,22 +150,10 @@ const NewWeather = () => {
     </div>
   ));
 
-  // console.log(currentWeather)
 
   const { main, weather } = currentWeather;
 
-  // const { weather } = currentWeather;
-
-    // console.log(weather)
-    // if(weather?.length){
-    //    console.log(weather[0]?.icon);
-    // }
-
-    console.log(weather)
-
-    // console.log(icon)
-
-    console.log(main?.temp)
+  console.log(city)
 
   return (
     <>

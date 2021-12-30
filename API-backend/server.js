@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const  userRoutes  = require('./routes/userRoutes');
+const userRoutes  = require('./routes/userRoutes');
+const cityRoutes = require('./routes/cityRoutes');
 
 // set up our express app
 const app = express();
@@ -17,6 +18,8 @@ app.use(express.json());
 
 // initialize routes
 app.use('/api/user',userRoutes);
+
+app.use('/api/location',cityRoutes)
 
 // error handling middleware
 app.use(function(err,req,res,next){
