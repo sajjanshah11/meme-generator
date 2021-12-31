@@ -4,6 +4,7 @@ import axios from "axios"
 import "./weather.css";
 import  { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+// import "./Login.css"
 
 const Login = () =>{
     const [email,setEmail] = useState("");
@@ -60,15 +61,20 @@ const Login = () =>{
     // console.log(error)
     return(
         <> 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+            <nav class="navbar navbar-expand-lg navbar-dark p-3 mycutomnav">
                 <div class="col-3">
                     <div class="container-fluid">
-                        <span class="navbar-brand mb-0 h1">Weather Application</span>
+                        <span class="navbar-brand mb-0 h1 customheader">Weather Application</span>
                     </div>
                 </div>
             </nav>
                 <div className = "main-login">
-                    <div className = "login">
+                    <div className = "left-panel">
+                        <img className = "left-image" src = "https://images.unsplash.com/photo-1503327431567-3ab5e6e79140?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80"/>
+                    </div>
+
+                    <div className = "right-panel">
+                        <div className = "login">
                         <h1 className = "center1">Login</h1>
                         <form onSubmit = {submitHandler}>
                             <div class="mb-3">
@@ -99,10 +105,12 @@ const Login = () =>{
                         
                         </form>
 
-                        <div>
-                            New Customer ? <Link to="/signup">Register Here</Link>
+                            <div>
+                                New Customer ? <Link to="/signup">Register Here</Link>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>    
         </>
     )

@@ -1,8 +1,8 @@
 
 body{
-background: #f4c4f3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #fc67fa, #f4c4f3);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #fc67fa, #f4c4f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/* background: #f4c4f3;   */
+/* background: -webkit-linear-gradient(to right, #fc67fa, #f4c4f3);  */
+  /* background: linear-gradient(to right, #fc67fa, #f4c4f3);  */
   font-family: 'Readex Pro', sans-serif;
   font-family: 'Roboto Slab', serif;
 }
@@ -135,21 +135,31 @@ table{
     top: 2rem;
   }
 
-  .main-login{
+  /* .main-login{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 4rem;
-  }
+  } */
 
   .login{
-    border: 1px solid #ac6a6a;
+    /* border: 1px solid #ac6a6a; */
     padding: 2rem;
     position: relative;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    
   }
 
   .center1{
     text-align: center;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #ff2340, #9500ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+    height: 4rem;
   }
 
   .parent{
@@ -157,3 +167,69 @@ table{
     right: 32px;
     bottom: 27px;
   }
+
+  .mycutomnav{
+    background: linear-gradient(to right, #c64f4c, #3c88b8);
+    /* box-shadow: rgba(214, 202, 210, 0.48) 1px 27px 21px; */
+    border: none;
+    border-style: none;
+  }
+
+  .customheader{
+    font-family: 'Aldrich', sans-serif;
+  font-family: 'Readex Pro', sans-serif;
+  font-family: 'Roboto Slab', serif;
+  font-family: 'Staatliches', cursive;
+  }
+
+  .main-login{
+    /* margin-top: 2rem; */
+    display: flex;
+    width: 100vw;
+    height: 87vh;
+  }
+  
+  .left-panel{
+    width: 50%;
+    height: 100%;
+    /* border: 1px solid red; */
+    overflow: hidden;
+    border-radius: 0 50% 50% 0;
+    margin-top: 2px;
+  }
+
+  .right-panel{
+    width: 50%;
+    height: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-image{
+    width: 100%;
+    height: 100%;
+  }
+
+  .signup-left-panel{
+    width: 40%;
+    height: 100%;
+    margin: 2rem;
+  }
+
+  .signup-right-panel{
+    /* border: 2px solid red; */
+    width: 60%;
+    height: 100%;
+    margin-top: 2px;
+  }
+
+  .signup-right-panel img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 0 0 50%;
+    /* margin: 2rem; */
+    /* contain: fit; */
+  } 
+  

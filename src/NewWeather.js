@@ -165,10 +165,10 @@ const NewWeather = () => {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 mycutomnav">
         <div class="col-3">
           <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">Weather Application</span>
+            <span class="navbar-brand mb-0 h1 customheader">Weather Application</span>
           </div>
         </div>
 
