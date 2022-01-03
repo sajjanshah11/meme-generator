@@ -2,14 +2,9 @@ const mongoose = require('mongoose');
 
 const citySchema = mongoose.Schema(
     {
-        city : {
-            type:String
+        cityArray : {
+            type:[String]
         },
-
-        userId :{
-            type:String
-        },
-
         email :{
             type:String
         }

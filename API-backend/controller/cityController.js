@@ -4,21 +4,33 @@ const asyncHandler = require('express-async-handler');
 
 const saveCityName = asyncHandler(async(req,res)=>{
 
-    const { userId,city,email } = req.body;
+    const {cityArray,email } = req.body;
 
-    const cityObj = await City.create({userId,city,email})
+            const city = await City.findOneAndUpdate(
+                {
+                    email: req.body.email
+                }, 
+                {
+                    $addToSet: {
+                        cityArray: req.body.cityArray
+                    }
+                }, { upsert: true }
+            );
 
-    if(cityObj){
-        res.status(201).json({
-            _id:cityObj._id,
-            userId:cityObj.userId,
-            city:cityObj.city,
-            email:cityObj.email,
-            status:"city name stored"
-        })
-    }else {
-         res.status(500).json({status:'error',message:"city name not saved"})
-    }
+            if(city.cityArray.length){
+                res.json({
+                    email:city.email,
+                    status:"success",
+                    message:"city name added to db"
+                })
+            }else{
+                res.status(500).json({
+                    status:"failed",
+                    message:"city name not added to db"
+                })
+            } 
+    
+        
 })
 
 

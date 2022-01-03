@@ -7,8 +7,6 @@ const WeatherMap = (props) => {
   const mapStyles = {        
     height: "50vh",
     width: "100%",
-    // marginLeft:"25rem",
-    // marginBottom:"5rem"
     };
   return (
      <LoadScript

@@ -10,17 +10,17 @@ const Signup = ()=>{
     const[email,setEmail] = useState("");
     const[password,setPassword] = useState("");
     const[confirmpassword,setConfirmpassword] = useState("");
-    const[message,setMessage] = useState(null);
+    // const[message,setMessage] = useState(null);
 
     let history = useHistory();
 
     async function submitHandler(e){
         e.preventDefault();
         if(password !== confirmpassword){
-            setMessage("Password do not match");
+            // setMessage("Password do not match");
             alert("password do not match")
         }else {
-            setMessage(null)
+            // setMessage(null)
 
             try {
                 const config = {
@@ -50,7 +50,7 @@ const Signup = ()=>{
         }
     }
 
-    console.log(message)
+    // console.log(message)
 
     return(
         <> 
@@ -130,7 +130,7 @@ const Signup = ()=>{
                 </div>
 
                 <div className = "signup-right-panel">
-                    <img src = "https://www.spatialtimes.com/static/9baaa29580ff1004d4b9fbebcdeba225/8dba1/tanner-van-dera-741079-unsplash.jpg"/>
+                    <img src = "https://www.spatialtimes.com/static/9baaa29580ff1004d4b9fbebcdeba225/8dba1/tanner-van-dera-741079-unsplash.jpg" alt = "please check your internet connection"/>
                 </div>
             </div>
         </>

@@ -1,17 +1,14 @@
 import React from 'react';
 import NewWeather from "./NewWeather";
-
+import Login from "./Login";
+import Signup from "./Signup";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
 } from "react-router-dom";
 
-import Login from "./Login";
-import Signup from "./Signup";
+
 
 
 const App = () => {

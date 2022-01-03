@@ -2,23 +2,19 @@ import React,{ useState,useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios"
 import "./weather.css";
-import  { Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
-// import "./Login.css"
+
 
 const Login = () =>{
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const [error,setError] = useState("");
-    const[loading,setLoading]  = useState(false);
 
     let history = useHistory();
 
     useEffect(()=>{
         const email = localStorage.getItem("email")
         const token = localStorage.getItem("token")
-        // console.log(token,email)
-        // console.log("hi")
+    
         if(email && token){  
             history.push('/main')
         } 
@@ -26,7 +22,7 @@ const Login = () =>{
 
     async function submitHandler(e){
         e.preventDefault();
-        // console.log(email,password)
+        
         try{
             const config = {
                 headers: {
@@ -34,7 +30,7 @@ const Login = () =>{
                 },
             };
 
-            // setLoading(true)    
+               
 
             const { data } = await axios.post(
             "/api/user/login",
@@ -51,14 +47,14 @@ const Login = () =>{
            }else {
                alert(data.message)
            }
-            // setLoading(false)
+           
         }catch(error){
             console.log(error)
-            setError(error.response.data.message)
+           
 
         }
     }
-    // console.log(error)
+
     return(
         <> 
             <nav class="navbar navbar-expand-lg navbar-dark p-3 mycutomnav">
