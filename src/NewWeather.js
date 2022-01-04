@@ -109,7 +109,7 @@ const NewWeather = () => {
     } else if (!city) {
       setDayFiveMessage("City Name is Missing");
     } else if (dayCount === null) {
-      setDayFiveMessage("day count is higher , please check!");
+      setDayFiveMessage("Day count is null");
     } else if (!dayCount) {
       setDayFiveMessage("day is missing");
     } else {
