@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userRoutes  = require('./routes/userRoutes');
 const cityRoutes = require('./routes/cityRoutes');
 
+
 // set up our express app
 const app = express();
 
@@ -23,11 +24,17 @@ app.use('/api/user',userRoutes);
 
 app.use('/api/location',cityRoutes)
 
+
+
 // error handling middleware
 app.use(function(err,req,res,next){
     //console.log(err);
     res.status(400).send({error: err.message});
 });
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('../build'))
+}
 
 
 // listen for requests
