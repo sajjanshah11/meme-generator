@@ -6,6 +6,9 @@ const saveCityName = asyncHandler(async(req,res)=>{
 
     const {cityArray,email } = req.body;
 
+
+    
+
             const city = await City.findOneAndUpdate(
                 {
                     email: req.body.email
