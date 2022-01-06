@@ -2,6 +2,9 @@
   "name": "meme-app",
   "proxy": "http://127.0.0.1:5000",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.18.4"
+  },
   "private": true,
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.1.18",
