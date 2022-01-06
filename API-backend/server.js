@@ -8,7 +8,9 @@ const app = express();
 
 // connect to mongodb
 
-mongoose.connect(process.env.MONGODB_URI);  
+let mongodb = "mongodb+srv://weather:12345@cluster0.jtsgl.mongodb.net/weather?retryWrites=true&w=majority"
+
+mongoose.connect(process.env.MONGODB_URI || mongodb);  
 mongoose.Promise = global.Promise;
 
 
