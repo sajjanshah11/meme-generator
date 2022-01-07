@@ -25,16 +25,16 @@ const mostCity = async function(req,res){
     ]).then(result => {
 
         const cityName = result[0]._id;
-        let data;
-        let key = "57d277927c76ef5e55af9e48d8425fed"
-        console.log(cityName)
-        try{
-             data  = axios.get("https://api.openweathermap.org/data/2.5/weather",{ params: { q: cityName,APPID:key } })
-        } catch(error){
-            console.log(error.message)
-        }
+        // let data;
+        // let key = "57d277927c76ef5e55af9e48d8425fed"
+        // console.log(cityName)
+        // try{
+        //      data  = axios.get("https://api.openweathermap.org/data/2.5/weather",{ params: { q: cityName,APPID:key } })
+        // } catch(error){
+        //     console.log(error.message)
+        // }
 
-        console.log(data)
+        // console.log(data)
 
         console.log(cityName)
         
