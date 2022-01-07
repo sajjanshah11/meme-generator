@@ -2,13 +2,18 @@ const mongoose = require('mongoose');
 
 const citySchema = mongoose.Schema(
     {
-        cityArray : {
-            type:[String]
+        
+        city : {
+            type:String
         },
-        email :{
+        count:{
+            type:Number
+        },email:{
             type:String
         }
+        
     }
+    // {collections:searchedCities}
 )
 
 

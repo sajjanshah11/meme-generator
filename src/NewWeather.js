@@ -5,7 +5,7 @@ import * as ReactBootStrap from "react-bootstrap";
 import WeatherMap from "./WeatherMap";
 import { useHistory } from "react-router-dom";
 
-let cityArray = [];
+// let cityArray = [];
 const API_BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 const NewWeather = () => {
@@ -63,9 +63,9 @@ const NewWeather = () => {
     setCity(event.target.value);
   }
 
-  console.log(cityArray);
+  // console.log(cityArray);
 
-  console.log(cityArray, "cityArray");
+  // console.log(cityArray, "cityArray");
 
   function oneApiCall() {
     if (latitude1 && longitude1) {
@@ -79,7 +79,7 @@ const NewWeather = () => {
   async function searchHandler() {
     setApi("/weather");
     setOneApiMessage("");
-    cityArray.push(city);
+    // cityArray.push(city);
 
     try {
       const config = {
@@ -89,10 +89,17 @@ const NewWeather = () => {
       };
 
       let callData = {
-        cityArray: cityArray,
+        city: city,
+        count:1,
         email: localStorage.getItem("email"),
       };
+     
+
       const { data } = await axios.post("/api/location/city", callData, config);
+
+      // if(data){
+      //   localStorage.setItem("weatherSearch",JSON.stringify(result));
+      // }
 
       console.log(data)
     } catch (error) {
